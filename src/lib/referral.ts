@@ -1,8 +1,6 @@
 /**
- * Referral system with protection against misuse
- * - Rate limiting
- * - Unique referral codes
- * - Verification before rewards
+ * Referral system with protection against misuse.
+ * Rate limiting, unique referral codes, verification before rewards.
  */
 
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
