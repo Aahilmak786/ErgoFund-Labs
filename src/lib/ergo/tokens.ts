@@ -1,6 +1,6 @@
 /**
- * Multi-token support for Bene Fundraising Platform
- * ERG (native), stablecoins (SigUSD, etc.), and custom tokens
+ * Multi-token support for Bene Fundraising Platform.
+ * ERG (native), stablecoins (SigUSD, etc.), and custom tokens.
  */
 
 // Ergo mainnet token IDs (placeholders - use actual IDs in production)
