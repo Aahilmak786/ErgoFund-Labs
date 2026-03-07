@@ -1,5 +1,6 @@
 // Bene Fundraising Campaign Contract (ErgoScript)
 // AOSSIE Technologies - ErgoFund Labs
+// Registers: R4=goal, R5=deadline, R6=recipient
 //
 // Campaign box registers:
 //   R4 - goal: Long     (funding goal in nanoERG)
