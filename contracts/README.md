@@ -1,6 +1,7 @@
 # Bene Fundraising – ErgoScript Contracts
 
-ErgoScript smart contracts for the Bene fundraising platform on Ergo (AOSSIE Technologies).
+ErgoScript smart contracts for the Bene fundraising platform on Ergo (AOSSIE Technologies).  
+Compile with [escript.online](https://escript.online/) or the ErgoScript compiler.
 
 ## Contracts
 
