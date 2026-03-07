@@ -1,6 +1,6 @@
 /**
- * Multi-wallet connector for Ergo blockchain
- * Supports Nautilus, Yoroi, SAFEW via EIP-12 dApp Connector API
+ * Multi-wallet connector for Ergo blockchain.
+ * Supports Nautilus, Yoroi, SAFEW via EIP-12 dApp Connector API.
  */
 
 // EIP-12 ergo connector types
