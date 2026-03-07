@@ -1,5 +1,5 @@
 /**
- * Svelte store for wallet connection state
+ * Svelte store for wallet connection state (Ergo wallets).
  */
 import { writable, derived } from 'svelte/store';
 import type { ConnectedWallet, WalletType } from '$lib/ergo/wallet';
