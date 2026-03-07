@@ -1,4 +1,4 @@
-# Bene Fundraising Platform - Ergo Blockchain
+# Bene Fundraising Platform – Ergo Blockchain (AOSSIE)
 # Multi-stage build for production
 FROM node:20-alpine AS builder
 
