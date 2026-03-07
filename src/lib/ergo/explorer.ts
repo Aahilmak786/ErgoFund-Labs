@@ -1,5 +1,5 @@
 /**
- * Ergo Explorer API client - blockchain data retrieval
+ * Ergo Explorer API client – blockchain data retrieval.
  * Mainnet: api.ergoplatform.com | Testnet: api-testnet.ergoplatform.com
  */
 
