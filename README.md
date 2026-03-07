@@ -2,6 +2,8 @@
 
 A fundraising platform on the Ergo blockchain with multi-token support, stablecoins, referrals, and analytics. Built for AOSSIE Technologies.
 
+**2-month plan:** See [ROADMAP.md](./ROADMAP.md) (Feb 17 – Apr 17, 2026). Goal: 5 commits/day, project complete by Apr 17.
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -83,3 +85,7 @@ src/
 ## Wallet Requirements
 
 Install [Nautilus](https://nautilus.io/) or [Yoroi](https://yoroi-wallet.com/) for Ergo.
+
+## License
+
+MIT. See repository for details.
