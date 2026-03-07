@@ -1,3 +1,4 @@
+# CI: lint, format check, test, build on push/PR
 name: CI
 
 on:
