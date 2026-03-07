@@ -1,5 +1,6 @@
 // Bene Refund Path (ErgoScript) - Placeholder
 // AOSSIE Technologies - ErgoFund Labs
+// Expand when implementing refund-on-failure.
 //
 // When a campaign fails (HEIGHT >= deadline and SELF.value < goal),
 // contributors can claim refunds using refund tokens.
