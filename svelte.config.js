@@ -1,3 +1,4 @@
+/** SvelteKit config – adapter-node for Docker/Node deploy */
 import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
