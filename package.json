@@ -2,6 +2,7 @@
 	"name": "bene-fundraising",
 	"version": "0.0.1",
 	"private": true,
+	"keywords": ["ergo", "fundraising", "blockchain", "sveltekit", "aossie"],
 	"description": "Bene Fundraising Platform on Ergo blockchain - Multi-token support, referrals, analytics",
 	"type": "module",
 	"scripts": {
