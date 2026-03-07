@@ -1,3 +1,4 @@
+# Dependencies and build artifacts
 node_modules
 .git
 .svelte-kit
