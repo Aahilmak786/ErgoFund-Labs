@@ -27,7 +27,7 @@ A fundraising platform on the Ergo blockchain with multi-token support, stableco
 
 ```bash
 npm install
-cp .env.example .env   # optional: customize Ergo API URL
+cp .env.example .env   # required for contract ErgoTree; optional Explorer URL
 npm run dev
 ```
 
@@ -49,6 +49,12 @@ Open [http://localhost:5173](http://localhost:5173).
 ## Ergo Testnet
 
 Set `PUBLIC_ERGO_EXPLORER_URL=https://api-testnet.ergoplatform.com` for Testnet. Use a Testnet wallet (Nautilus/Yoroi) when testing.
+
+## Contracts / Fleet SDK
+
+To build real transactions for `BeneCampaign.ergo`, set:
+
+- `PUBLIC_BENE_CAMPAIGN_ERGOTREE`: compiled ErgoTree hex for `contracts/BeneCampaign.ergo`
 
 ## API Routes
 

@@ -15,6 +15,7 @@ export interface ErgoConnector {
 	getUtxos: (amount?: string, tokenId?: string) => Promise<ErgoBox[]>;
 	signTx: (tx: ErgoTx) => Promise<ErgoTx>;
 	signInput: (tx: ErgoTx, index: number) => Promise<Input>;
+	submitTx: (tx: ErgoTx) => Promise<string>;
 }
 
 export interface ErgoStateContext {
@@ -155,4 +156,9 @@ export async function getCreationHeight(type: WalletType): Promise<number> {
 	const connector = window.ergoConnector?.[type];
 	const context = await connector?.getContext();
 	return context?.height ?? 0;
+}
+
+export function getWalletConnector(type: WalletType): ErgoConnector | undefined {
+	if (typeof window === 'undefined') return undefined;
+	return window.ergoConnector?.[type];
 }

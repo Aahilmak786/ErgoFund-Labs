@@ -6,3 +6,5 @@
 
 export * from './wallet';
 export * from './tokens';
+export * from './campaign';
+export * from './contracts';
