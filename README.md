@@ -1,1 +1,0 @@
-# ErgoFund-Labs
