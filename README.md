@@ -2,7 +2,7 @@
 
 A fundraising platform on the Ergo blockchain with multi-token support, stablecoins, referrals, and analytics. Built for AOSSIE Technologies.
 
-**2-month plan:** See [ROADMAP.md](./ROADMAP.md) (Feb 17 – Apr 17, 2026). Goal: 5 commits/day, project complete by Apr 17.
+**2-month plan:** See [ROADMAP.md](./ROADMAP.md) (Feb 17 � Apr 17, 2026). Goal: 5 commits/day, project complete by Apr 17.
 
 ## Tech Stack
 
@@ -10,7 +10,7 @@ A fundraising platform on the Ergo blockchain with multi-token support, stableco
 |-------|------------|
 | **Frontend** | SvelteKit, TypeScript, Vite |
 | **Backend** | Node.js (SvelteKit server), Ergo Explorer APIs |
-| **DevOps** | Docker, GitHub Actions |
+| **DevOps** | Docker, GitHub Actions, Render/Fly deployment configs |
 | **Quality** | ESLint, Prettier |
 | **Testing** | Jest, Ergo Testnet |
 
@@ -27,7 +27,6 @@ A fundraising platform on the Ergo blockchain with multi-token support, stableco
 
 ```bash
 npm install
-cp .env.example .env   # optional: customize Ergo API URL
 npm run dev
 ```
 
@@ -53,12 +52,32 @@ Set `PUBLIC_ERGO_EXPLORER_URL=https://api-testnet.ergoplatform.com` for Testnet.
 ## API Routes
 
 - `GET /api/explorer/address?address=<addr>&testnet=true` - Fetch address balance and UTXOs from Ergo Explorer
+- `GET /api/health` - Health check endpoint for deployment platforms
 
-## Docker
+## Docker (preferred)
 
 ```bash
 docker-compose up --build
 ```
+
+App runs at `http://localhost:3000`.
+
+## Live Deployment
+
+### Render (recommended, Docker-first)
+1. Push this repo to GitHub.
+2. Create a new **Web Service** in Render and select this repo.
+3. Render auto-detects `render.yaml` and Dockerfile.
+4. Set environment variable (optional):
+   - `PUBLIC_ERGO_EXPLORER_URL=https://api.ergoplatform.com`
+5. Deploy and open the generated live URL.
+
+### Fly.io
+- Use included `fly.toml`.
+- Run: `fly launch` then `fly deploy`.
+
+### Vercel / Netlify
+- Config files `vercel.json` and `netlify.toml` are included for alternative hosting.
 
 ## CI/CD
 
@@ -72,15 +91,21 @@ GitHub Actions runs on push/PR to `main` and `develop`:
 
 ```
 src/
-├── lib/
-│   ├── ergo/           # Ergo wallet, tokens, Explorer API
-│   ├── components/     # Shared UI
-│   ├── stores/         # Svelte stores
-│   └── __tests__/      # Jest unit tests
-├── routes/
-│   ├── api/            # Node.js API routes
-│   └── ...             # Pages
++-- lib/
+�   +-- ergo/           # Ergo wallet, tokens, Explorer API
+�   +-- components/     # Shared UI
+�   +-- stores/         # Svelte stores
+�   +-- __tests__/      # Jest unit tests
++-- routes/
+�   +-- api/            # Node.js API routes
+�   +-- ...             # Pages
 ```
+
+## Formal Report and Viva
+
+- Project report: [`docs/PROJECT_REPORT.md`](./docs/PROJECT_REPORT.md)
+- Wiki-ready pages: [`docs/wiki/`](./docs/wiki)
+- Viva prep questions: [`docs/VIVA_QUESTIONS.md`](./docs/VIVA_QUESTIONS.md)
 
 ## Wallet Requirements
 
