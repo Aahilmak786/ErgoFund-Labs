@@ -1,116 +1,35 @@
-# Bene Fundraising Platform
+# BenefactionPlatform-Ergo
 
-A fundraising platform on the Ergo blockchain with multi-token support, stablecoins, referrals, and analytics. Built for AOSSIE Technologies.
+Production-ready monorepo for a multi-token fundraising platform on Ergo.
 
-**2-month plan:** See [ROADMAP.md](./ROADMAP.md) (Feb 17 – Apr 17, 2026). Goal: 5 commits/day, project complete by Apr 17.
+## Monorepo Layout
 
-## Tech Stack
+- `apps/frontend`: SvelteKit app (wallet UX, campaign UI, analytics dashboard)
+- `packages/contracts`: ErgoScript contracts and contract-level tests
+- `packages/sdk`: Fleet SDK abstractions (transaction manager, wallet provider)
+- `packages/services`: Node services (analytics/referral protection API)
+- `packages/ui`: Shared design tokens and reusable UI primitives
+- `infra`: Docker and deployment manifests
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | SvelteKit, TypeScript, Vite |
-| **Backend** | Node.js (SvelteKit server), Ergo Explorer APIs |
-| **DevOps** | Docker, GitHub Actions, Render/Fly deployment configs |
-| **Quality** | ESLint, Prettier |
-| **Testing** | Jest, Ergo Testnet |
+## Quick Start
 
-## Features
+1. Install dependencies:
+   - `npm install`
+2. Run frontend:
+   - `npm run dev`
+3. Run contract tests:
+   - `npm run test --workspace @benefaction/contracts`
+4. Run services locally:
+   - `npm run dev --workspace @benefaction/services`
 
-- Multi-token support (ERG, SigUSD, custom tokens)
-- Multiple wallet integration (Nautilus, Yoroi, SAFEW via EIP-12)
-- Ergo Explorer API integration for blockchain data
-- Referral system with misuse protection
-- Project analytics dashboard
-- Ergo Testnet support for integration testing
+## Security Notes
 
-## Setup
+- Token IDs are allowlisted for anti-spoofing
+- Referral service blocks self-referrals and duplicate source fingerprints
+- Fleet transaction queue includes retries and status transitions
 
-```bash
-npm install
-npm run dev
-```
+## Deployment
 
-Open [http://localhost:5173](http://localhost:5173).
-
-## Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build |
-| `npm run check` | SvelteKit sync + type check |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format with Prettier |
-| `npm run format:check` | Check Prettier formatting |
-| `npm test` | Run Jest unit tests |
-
-## Ergo Testnet
-
-Set `PUBLIC_ERGO_EXPLORER_URL=https://api-testnet.ergoplatform.com` for Testnet. Use a Testnet wallet (Nautilus/Yoroi) when testing.
-
-## API Routes
-
-- `GET /api/explorer/address?address=<addr>&testnet=true` - Fetch address balance and UTXOs from Ergo Explorer
-- `GET /api/health` - Health check endpoint for deployment platforms
-
-## Docker (preferred)
-
-```bash
-docker-compose up --build
-```
-
-App runs at `http://localhost:3000`.
-
-## Live Deployment
-
-### Render (recommended, Docker-first)
-1. Push this repo to GitHub.
-2. Create a new **Web Service** in Render and select this repo.
-3. Render auto-detects `render.yaml` and Dockerfile.
-4. Set environment variable (optional):
-   - `PUBLIC_ERGO_EXPLORER_URL=https://api.ergoplatform.com`
-5. Deploy and open the generated live URL.
-
-### Fly.io
-- Use included `fly.toml`.
-- Run: `fly launch` then `fly deploy`.
-
-### Vercel / Netlify
-- Config files `vercel.json` and `netlify.toml` are included for alternative hosting.
-
-## CI/CD
-
-GitHub Actions runs on push/PR to `main` and `develop`:
-- ESLint & Prettier
-- SvelteKit check
-- Jest tests
-- Build
-
-## Project Structure
-
-```
-src/
-+-- lib/
-¦   +-- ergo/           # Ergo wallet, tokens, Explorer API
-¦   +-- components/     # Shared UI
-¦   +-- stores/         # Svelte stores
-¦   +-- __tests__/      # Jest unit tests
-+-- routes/
-¦   +-- api/            # Node.js API routes
-¦   +-- ...             # Pages
-```
-
-## Formal Report and Viva
-
-- Project report: [`docs/PROJECT_REPORT.md`](./docs/PROJECT_REPORT.md)
-- Wiki-ready pages: [`docs/wiki/`](./docs/wiki)
-- Viva prep questions: [`docs/VIVA_QUESTIONS.md`](./docs/VIVA_QUESTIONS.md)
-
-## Wallet Requirements
-
-Install [Nautilus](https://nautilus.io/) or [Yoroi](https://yoroi-wallet.com/) for Ergo.
-
-## License
-
-MIT. See repository for details.
+- Frontend: deploy `apps/frontend` to Vercel or Netlify
+- Full stack: run `docker compose -f infra/docker-compose.yml up --build`
+- CI/CD: `.github/workflows/ci.yml`
