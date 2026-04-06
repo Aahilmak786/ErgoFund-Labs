@@ -1,0 +1,13 @@
+node_modules
+.cursor
+dist
+.svelte-kit
+build
+.env
+.env.*
+!.env.example
+apps/*/.env
+!apps/*/.env.example
+coverage
+.DS_Store
+*.log

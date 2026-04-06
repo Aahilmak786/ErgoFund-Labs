@@ -1,0 +1,23 @@
+{
+  "name": "@benefaction/sdk",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@fleet-sdk/common": "^0.10.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

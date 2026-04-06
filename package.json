@@ -1,0 +1,19 @@
+{
+  "name": "benefactionplatform-ergo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BenefactionPlatform-Ergo — Ergo fundraising (monorepo)",
+  "scripts": {
+    "build:sdk": "npm --prefix packages/sdk run build",
+    "dev:frontend": "npm --prefix apps/frontend run dev",
+    "dev:backend": "npm --prefix apps/backend run dev",
+    "build:backend": "npm --prefix apps/backend run build",
+    "build:frontend": "npm run build:sdk && npm --prefix apps/frontend run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "check": "npm --prefix apps/frontend run check",
+    "test:api": "node scripts/test-api.mjs",
+    "docker:up": "docker compose -f infra/docker-compose.yml up --build",
+    "db:seed": "docker compose -f infra/docker-compose.yml exec -T db psql -U bene -d bene -f /docker-entrypoint-initdb.d/02-seed.sql",
+    "wiki:push": "powershell -ExecutionPolicy Bypass -File scripts/push-github-wiki.ps1"
+  }
+}

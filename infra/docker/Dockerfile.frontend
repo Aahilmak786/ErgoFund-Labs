@@ -1,0 +1,20 @@
+FROM node:20-alpine AS build
+WORKDIR /workspace
+
+COPY packages/sdk/package*.json packages/sdk/tsconfig.json packages/sdk/
+COPY packages/sdk/src packages/sdk/src
+RUN cd packages/sdk && npm ci && npm run build
+
+COPY apps/frontend apps/frontend
+RUN cd apps/frontend && npm ci && npm run build
+
+FROM node:20-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
+COPY --from=build /workspace/apps/frontend/build ./build
+COPY --from=build /workspace/apps/frontend/package.json ./
+COPY --from=build /workspace/apps/frontend/node_modules ./node_modules
+EXPOSE 3000
+CMD ["node", "build"]

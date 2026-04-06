@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: bene
+          POSTGRES_PASSWORD: bene
+          POSTGRES_DB: bene
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U bene -d bene"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install & build SDK
+        run: |
+          npm --prefix packages/sdk install
+          npm --prefix packages/sdk run build
+
+      - name: Backend install, lint, build
+        env:
+          DATABASE_URL: postgresql://bene:bene@localhost:5432/bene
+        run: |
+          npm --prefix apps/backend install
+          npm --prefix apps/backend run lint
+          npm --prefix apps/backend run build
+
+      - name: Install psql client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Apply DB schema
+        env:
+          PGPASSWORD: bene
+        run: psql -h localhost -U bene -d bene -f apps/backend/db/init.sql
+
+      - name: Frontend install & check & build
+        run: |
+          npm --prefix apps/frontend install
+          npm --prefix apps/frontend run check
+          npm --prefix apps/frontend run build
+
+      - name: Docker build (optional smoke)
+        run: |
+          docker build -f infra/docker/Dockerfile.backend .
+          docker build -f infra/docker/Dockerfile.frontend .

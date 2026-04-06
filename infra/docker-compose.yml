@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bene
+      POSTGRES_PASSWORD: bene
+      POSTGRES_DB: bene
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../apps/backend/db/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ../apps/backend/db/02-seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U bene -d bene']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ..
+      dockerfile: infra/docker/Dockerfile.backend
+    environment:
+      DATABASE_URL: postgresql://bene:bene@db:5432/bene
+      PORT: 8080
+      CORS_ORIGIN: '*'
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: infra/docker/Dockerfile.frontend
+    environment:
+      PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
