@@ -1,0 +1,42 @@
+name: Wiki sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/wiki/**'
+      - '.github/workflows/wiki-sync.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push wiki from docs/wiki
+        env:
+          WIKI_TOKEN: ${{ secrets.WIKI_PUSH_TOKEN }}
+        run: |
+          if [ -z "${WIKI_TOKEN}" ]; then
+            echo "WIKI_PUSH_TOKEN not set — skipping wiki push (enable in repo Settings → Secrets)."
+            exit 0
+          fi
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git clone "https://x-access-token:${WIKI_TOKEN}@github.com/Aahilmak786/ErgoFund-Labs.wiki.git" wiki_out
+          for f in docs/wiki/*.md; do
+            base=$(basename "$f")
+            case "$base" in README.md) continue ;; esac
+            cp "$f" "wiki_out/$base"
+          done
+          cd wiki_out
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No wiki changes."
+            exit 0
+          fi
+          git commit -m "docs(wiki): sync from docs/wiki"
+          git push
