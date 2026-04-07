@@ -1,0 +1,10 @@
+# Railway — Node API + PostgreSQL plugin. Stack unchanged (Express + pg + Zod).
+# https://docs.railway.com/reference/config-as-code
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm ci && npm run build"
+
+[deploy]
+startCommand = "npm run start"
+healthcheckPath = "/health"
+restartPolicyType = "ON_FAILURE"
