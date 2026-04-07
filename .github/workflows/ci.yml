@@ -36,12 +36,13 @@ jobs:
           npm --prefix packages/sdk install
           npm --prefix packages/sdk run build
 
-      - name: Backend install, lint, build
+      - name: Backend install, lint, test, build
         env:
           DATABASE_URL: postgresql://bene:bene@localhost:5432/bene
         run: |
           npm --prefix apps/backend install
           npm --prefix apps/backend run lint
+          npm --prefix apps/backend run test
           npm --prefix apps/backend run build
 
       - name: Install psql client
