@@ -11,3 +11,5 @@ apps/*/.env
 coverage
 .DS_Store
 *.log
+apps/frontend/.vercel
+apps/frontend/.netlify

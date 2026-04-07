@@ -48,5 +48,8 @@
 </main>
 
 <footer class="footer">
-  <p>AOSSIE · BenefactionPlatform-Ergo · Fleet SDK · ErgoScript</p>
+  <p>
+    AOSSIE · BenefactionPlatform-Ergo · Fleet SDK · ErgoScript ·
+    <a href="https://github.com/Aahilmak786/ErgoFund-Labs/wiki">Wiki</a>
+  </p>
 </footer>

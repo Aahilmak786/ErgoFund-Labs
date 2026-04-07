@@ -1,0 +1,9 @@
+# SvelteKit stays on Netlify via @sveltejs/adapter-netlify (NETLIFY=true during build).
+# Repository root = Netlify site root.
+[build]
+  publish = "apps/frontend/build"
+  command = "npm --prefix packages/sdk ci && npm --prefix packages/sdk run build && npm --prefix apps/frontend ci && npm --prefix apps/frontend run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NETLIFY = "true"

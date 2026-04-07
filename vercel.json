@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm --prefix packages/sdk ci && npm --prefix apps/frontend ci",
+  "buildCommand": "npm --prefix packages/sdk run build && npm --prefix apps/frontend run build",
+  "outputDirectory": "apps/frontend/.vercel/output"
+}

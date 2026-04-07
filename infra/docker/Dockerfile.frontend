@@ -17,4 +17,4 @@ COPY --from=build /workspace/apps/frontend/build ./build
 COPY --from=build /workspace/apps/frontend/package.json ./
 COPY --from=build /workspace/apps/frontend/node_modules ./node_modules
 EXPOSE 3000
-CMD ["node", "build"]
+CMD ["node", "build/index.js"]

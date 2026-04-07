@@ -1,0 +1,21 @@
+# Fly.io example — deploy the backend Dockerfile from repo root:
+#   fly launch --config infra/fly.backend.toml --dockerfile infra/docker/Dockerfile.backend
+# Core stack remains Node + Express + PostgreSQL (external or Fly Postgres).
+
+app = "ergofund-backend"
+primary_region = "iad"
+
+[build]
+  dockerfile = "infra/docker/Dockerfile.backend"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

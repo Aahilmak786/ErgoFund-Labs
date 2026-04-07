@@ -1,0 +1,19 @@
+# Render blueprint — set DATABASE_URL in the Render dashboard (PostgreSQL).
+# https://render.com/docs/blueprint-specification
+services:
+  - type: web
+    name: ergofund-backend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: apps/backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: DATABASE_URL
+        sync: false

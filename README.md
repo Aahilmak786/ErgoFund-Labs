@@ -56,39 +56,44 @@ smart contracts · Web3 · Frontend Development · Blockchain Development · Tok
 
 ```bash
 cp .env.example .env
-# Install dependencies when package.json is present:
-# npm install
-# npm run dev
+npm install
+npm --prefix packages/sdk install
+npm --prefix apps/backend install
+npm --prefix apps/frontend install
+npm --prefix packages/sdk run build
 ```
+
+**Dev (two terminals):** `npm run dev:backend` · `npm run dev:frontend` — UI at `http://localhost:5173` (Vite proxies `/api` to `:8080`).
 
 See **[ARCHITECTURE.md](./ARCHITECTURE.md)** for UTXO flow, token model, and referral notes.
 
-## Documentation
-
-| | |
-| --- | --- |
-| **GitHub Wiki** | [github.com/Aahilmak786/ErgoFund-Labs/wiki](https://github.com/Aahilmak786/ErgoFund-Labs/wiki) — local dev, Docker, API smoke tests, project layout |
-| **Wiki source (reviewable in PRs)** | [`docs/github-wiki/`](./docs/github-wiki/) — sync to the GitHub Wiki with `scripts/push-github-wiki.ps1` |
-
 ## Environment variables
 
-All services must read RPC/explorer and app URLs from environment — see **`.env.example`**.
+All services read RPC/explorer and URLs from the environment — see **`.env.example`**. Production: set **`PUBLIC_API_URL`** on the frontend host and **`CORS_ORIGIN`** / **`DATABASE_URL`** on the API.
 
 ## Deployment (GSoC)
 
-| Target | Role |
-| --- | --- |
-| **Vercel** or **Netlify** | SvelteKit frontend (auto-deploy from GitHub, PR previews) |
-| **Render** or **Railway** | API/indexer if used — must expose **`GET /health`** |
-| **Docker Compose** | Full stack (frontend + optional API + optional PostgreSQL) |
+Stack stays **SvelteKit + Node API + Postgres + Ergo tooling**; hosts below only change how it runs.
+
+| Platform | Role | Config in repo |
+| --- | --- | --- |
+| **[Vercel](https://vercel.com)** | SvelteKit frontend (`VERCEL` → adapter-vercel) | `vercel.json` |
+| **[Netlify](https://netlify.com)** | SvelteKit frontend (`NETLIFY` → adapter-netlify) | `netlify.toml` |
+| **[Render](https://render.com)** | API + Postgres, `/health` | `render.yaml` |
+| **[Railway](https://railway.app)** | API + Postgres | `apps/backend/railway.toml` |
+| **[Fly.io](https://fly.io)** | API via Docker (optional) | `infra/fly.backend.toml` |
+| **Docker Compose** | Full stack locally / VM | `infra/docker-compose.yml` |
+
+**Firebase Hosting** is for static assets; use Vercel/Netlify for this SSR app and Render/Railway for the API (Firebase can still be used for analytics or extra static pages if you add them).
 
 Fill in after you deploy:
 
 | | URL |
 | --- | --- |
-| **Frontend** | _TBD — e.g. `https://<project>.vercel.app`_ |
-| **Backend/API** | _TBD if applicable_ |
-| **Repository** | `https://github.com/Aahilmak786/ErgoFund-Labs` |
+| **Frontend** | _your Vercel or Netlify URL_ |
+| **Backend/API** | _your Render or Railway URL_ |
+| **Wiki** | [github.com/Aahilmak786/ErgoFund-Labs/wiki](https://github.com/Aahilmak786/ErgoFund-Labs/wiki) (enable Wikis + sync from `docs/wiki/` or use the Wiki Sync workflow + `WIKI_PUSH_TOKEN`) |
+| **Repository** | [github.com/Aahilmak786/ErgoFund-Labs](https://github.com/Aahilmak786/ErgoFund-Labs) |
 
 ## Cursor rules
 
@@ -98,4 +103,4 @@ Project AI rules are in **`.cursor/rules/`** (GSoC deployment edition: stack, Do
 
 ## License
 
-See the repository license file when present (e.g. MIT).
+[MIT](./LICENSE)
