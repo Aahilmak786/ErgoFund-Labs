@@ -13,7 +13,6 @@
     "check": "npm --prefix apps/frontend run check",
     "test:api": "node scripts/test-api.mjs",
     "docker:up": "docker compose -f infra/docker-compose.yml up --build",
-    "db:seed": "docker compose -f infra/docker-compose.yml exec -T db psql -U bene -d bene -f /docker-entrypoint-initdb.d/02-seed.sql",
-    "wiki:push": "powershell -ExecutionPolicy Bypass -File scripts/push-github-wiki.ps1"
+    "db:seed": "docker compose -f infra/docker-compose.yml exec -T db psql -U bene -d bene -f /docker-entrypoint-initdb.d/02-seed.sql"
   }
 }
