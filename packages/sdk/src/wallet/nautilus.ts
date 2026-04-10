@@ -1,13 +1,18 @@
 import type { WalletSession } from '../types.js';
+import { readErgoAddressFromWindow } from './ergo-bridge.js';
 
-/** EIP-12 / Nautilus window.ergo / ergo types are injected at runtime. */
+/** Nautilus injects `window.ergo` (same bridge other Ergo wallets may share). */
 export async function connectNautilus(): Promise<WalletSession> {
-  const w = typeof window !== 'undefined' ? (window as unknown as { ergo?: { get_used_addresses?: () => Promise<string[]> } }) : undefined;
-  if (!w?.ergo?.get_used_addresses) {
-    throw new Error('Nautilus not available: install Nautilus for Ergo');
+  try {
+    const address = await readErgoAddressFromWindow();
+    return { walletId: 'nautilus', address, connected: true, displayLabel: 'Nautilus' };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    if (msg.includes('No Ergo wallet')) {
+      throw new Error(
+        'Nautilus not detected. Install the Nautilus wallet for your browser from the official Ergo / Nautilus site, then refresh this page.'
+      );
+    }
+    throw e;
   }
-  const addrs = await w.ergo.get_used_addresses();
-  const address = addrs[0];
-  if (!address) throw new Error('No Ergo address from wallet');
-  return { walletId: 'nautilus', address, connected: true, displayLabel: 'Nautilus' };
 }
