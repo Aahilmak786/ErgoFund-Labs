@@ -88,6 +88,14 @@ body {
   color: #041018;
 }
 
+.btn.ghost-outline {
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.55rem;
+}
+
 .addr-btn {
   display: inline-flex;
   align-items: center;

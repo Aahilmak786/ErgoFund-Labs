@@ -4,7 +4,10 @@
   import { theme, toggleTheme } from '$lib/theme';
   import { wallet, connect, disconnect, walletPanelOpen, walletError } from '$lib/stores/wallet';
   import WalletPanel from '$lib/components/WalletPanel.svelte';
+  import PasteSafePalModal from '$lib/components/PasteSafePalModal.svelte';
   let { children } = $props();
+
+  let pasteSafePalOpen = $state(false);
 
   onMount(() => {
     return theme.subscribe((v) => {
@@ -62,11 +65,26 @@
         <button type="button" class="btn secondary" onclick={() => connect('ergo-wallet')}
           >Ergo Wallet</button
         >
-        <button type="button" class="btn safepal" onclick={() => connect('safepal')}>SafePal</button>
+        <button
+          type="button"
+          class="btn safepal"
+          title="In-app Browser with Ergo, or paste Receive address"
+          onclick={() => connect('safepal')}>SafePal</button
+        >
+        <button
+          type="button"
+          class="btn ghost-outline"
+          title="Wallet01-728 is a label — paste your Ergo Receive address from SafePal"
+          onclick={() => (pasteSafePalOpen = true)}>Paste Ergo address</button
+        >
       </div>
     {/if}
   </div>
 </header>
+
+{#if pasteSafePalOpen}
+  <PasteSafePalModal onclose={() => (pasteSafePalOpen = false)} />
+{/if}
 
 {#if $walletError}
   <div class="banner error" role="alert">

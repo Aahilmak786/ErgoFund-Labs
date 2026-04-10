@@ -18,7 +18,7 @@ export async function connectSafePal(): Promise<WalletSession> {
     const msg = e instanceof Error ? e.message : String(e);
     if (msg.includes('No Ergo wallet')) {
       throw new Error(
-        'SafePal: open Benefaction in SafePal → **Browser** (DApp browser), choose the **Ergo** network, then tap Connect again. On desktop Chrome, use **Nautilus** instead.'
+        'SafePal: use **Browser** inside the app with Ergo, then tap SafePal again — or tap **Paste Ergo address** and copy your address from SafePal → Ergo → Receive (Wallet01-728 is only a label, not your chain address).'
       );
     }
     throw e;

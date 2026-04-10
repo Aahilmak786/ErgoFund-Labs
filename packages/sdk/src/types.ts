@@ -8,4 +8,6 @@ export interface WalletSession {
   connected: boolean;
   /** Human-readable wallet name for UI (e.g. SafePal). */
   displayLabel?: string;
+  /** True when the address was pasted (no browser extension); signing txs is not available. */
+  readOnly?: boolean;
 }

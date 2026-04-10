@@ -34,6 +34,12 @@
       >×</button
     >
   </div>
+  {#if session.readOnly}
+    <p class="readonly-note" role="status">
+      <strong>Read-only.</strong> This address was pasted from SafePal Receive. For signing transactions in the
+      browser, use <strong>SafePal → Browser</strong> or install <strong>Nautilus</strong>.
+    </p>
+  {/if}
   <p class="muted small">Connected Ergo address</p>
   <div class="addr-box">
     <code class="full-addr">{session.address}</code>
@@ -100,6 +106,15 @@
     justify-content: space-between;
     gap: 0.5rem;
     margin-bottom: 0.75rem;
+  }
+  .readonly-note {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    padding: 0.55rem 0.65rem;
+    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    margin: 0 0 0.75rem;
   }
   .panel-head h2 {
     margin: 0;
