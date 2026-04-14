@@ -2,15 +2,16 @@
 # Dashboard: https://app.netlify.com/teams/aahilmak318/projects — Import from GitHub → this repo.
 # Set PUBLIC_API_URL in Netlify UI to your deployed API; set CORS on the API to your *.netlify.app URL.
 [build]
-  publish = "apps/frontend/build"
-  command = "npm --prefix packages/sdk ci && npm --prefix packages/sdk run build && npm --prefix apps/frontend ci && npm --prefix apps/frontend run build"
+  base = "apps/frontend"
+  publish = "build"
+  command = "npm ci && npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
   NETLIFY = "true"
 
 [functions]
-  directory = "apps/frontend/.netlify/functions-internal"
+  directory = ".netlify/functions-internal"
 
 [[redirects]]
   from = "/*"
