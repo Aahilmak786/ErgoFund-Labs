@@ -93,8 +93,8 @@ Fill in after you deploy:
 | **Frontend** | _your Vercel or Netlify URL_ |
 | **Backend/API** | _your Render or Railway URL_ |
 | **Wiki** | [github.com/Aahilmak786/ErgoFund-Labs/wiki](https://github.com/Aahilmak786/ErgoFund-Labs/wiki) — full map in `docs/wiki/`; enable Wikis + **`WIKI_PUSH_TOKEN`** so [Wiki sync](.github/workflows/wiki-sync.yml) runs on each push to `main` |
-| **Netlify (team)** | [app.netlify.com/teams/aahilmak318/projects](https://app.netlify.com/teams/aahilmak318/projects) — import this repo; see `docs/wiki/Netlify-setup.md` |
-| **Repository** | [github.com/Aahilmak786/ErgoFund-Labs](https://github.com/Aahilmak786/ErgoFund-Labs) |
+| **Netlify (team)** | [ErgoFund-Labs](https://ergofund-labs.netlify.app/) — import this repo; see `docs/wiki/Netlify-setup.md` |
+| **Repository** | [github.com/Aahilmak786/ErgoFund-Labs](https://github.com/Aahilmak786/ErgoFund-Lab) |
 
 ## Cursor rules
 
