@@ -83,6 +83,85 @@ body {
   justify-content: flex-end;
 }
 
+.demo-backdrop {
+  position: fixed;
+  inset: 0;
+  border: none;
+  background: rgba(4, 12, 24, 0.55);
+  z-index: 35;
+}
+
+.demo-wallet-panel {
+  position: fixed;
+  top: 5.5rem;
+  right: 1rem;
+  width: min(92vw, 420px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.3);
+  z-index: 45;
+  padding: 1rem 1.1rem;
+}
+
+.demo-wallet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.demo-wallet-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.demo-mode-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--brand);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  background: var(--bg);
+}
+
+.demo-label {
+  margin: 0.7rem 0 0.3rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.demo-address {
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+
+.demo-balance {
+  margin: 0;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.demo-token-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text);
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
 .addr-btn {
   display: inline-flex;
   align-items: center;

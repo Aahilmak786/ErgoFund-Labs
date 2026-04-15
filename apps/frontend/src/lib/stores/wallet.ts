@@ -20,6 +20,20 @@ export async function connect(kind: 'nautilus' | 'ergo-wallet'): Promise<void> {
   }
 }
 
+const DEMO_WALLET_SESSION: WalletSession = {
+  walletId: 'ergo-wallet',
+  address: '9fRAWhdxEsTcdb8PhGNrZfwqa65zfkuYHAMmkQLcic1gdLSV',
+  connected: true,
+  displayLabel: 'Demo Wallet',
+  readOnly: true
+};
+
+export function connectDemoWallet(): void {
+  walletError.set(null);
+  wallet.set(DEMO_WALLET_SESSION);
+  walletPanelOpen.set(true);
+}
+
 export function disconnect(): void {
   wallet.set(null);
   walletPanelOpen.set(false);
